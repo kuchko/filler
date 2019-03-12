@@ -5,27 +5,27 @@
 # include "ft_printf.h"
 # include "libft.h"
 
-typedef struct		s_piece
+typedef struct		s_fill
 {
-	int			*x;
-	int			*y;
-	int			x_size;
-	int			y_size;
-}					t_piece;
-
-typedef struct		s_map
-{
-	char		**m;
+	char		**c;
 	int			X;
 	int			N;
 	int			pl;
-}					t_map;
+	int			sx;
+	int			sy;
+	char		*en;
+	char		*fr;
+}					t_fill;
 
 int main(void);
 
-int		ft_map_read(t_map *map);
-int		ft_map_valid(t_map *map);
-char	**ft_creatmass(int k);
+int		ft_map_read(t_fill *mp);
+int		ft_creat_valid_map(t_fill *mp);
+int		ft_piece_read(t_fill *mp);
+int		ft_creat_valid_piece(t_fill *mp);
+
 void	ft_show(char **g);
 void	ft_doublefree(char **s);
+void	ft_solve_find(t_fill *map, t_fill *p);
+
 #endif

@@ -6,96 +6,43 @@
 //$$$ exec p
 int main(void)
 {
-	t_map	map;
+	t_fill	map;
+	t_fill	p;
 	char	*s;
 
+	ft_printf("%d\n", 2148);
 	if (get_next_line(1, &s) > 0 && (ft_strncmp(s, "$$$ exec p", 10) == 0)
 		&& (s[10] == '1' || s[10] == '2') && ((ft_atoi(s + 10) == 1) || (ft_atoi(s + 10) == 2)))
 	{
 		map.pl = ft_atoi(s + 10);
 		free(s);
-		ft_map_read(&map);
-		// if (ft_map_read(&map) == 0)
-		// 	return(0);
-		// if (ft_piece_read(s) == 0)
-		// 	return(0);
+		if (ft_map_read(&map) == 0 || ft_piece_read(&p) == 0)
+		{
+			system("leaks okuchko.filler");
+			return (0);
+		}
+		p.fr = (map.pl == 1) ? "Xx" : "Oo";
+		p.en = (map.pl == 1) ? "Oo" : "Xx";
+//		ft_solve_find(&map, &p);
+		ft_printf("%d %d\n", p.sx, p.sy);
+//		ft_show(map.c);
+//		ft_show(p.c);
+		ft_doublefree(map.c);
+		ft_doublefree(p.c);
 	}
 	else
 		ft_printf("Bad player info\n");
-	ft_show(map.m);
-	ft_doublefree(map.m);
 	system("leaks okuchko.filler");
 	return (0);
 }
 
-int	ft_map_read(t_map *map)
-{
-	char	**spl;
-	int		i;
-	char	*s;
-
-	i = 0;
-	if (get_next_line(1, &s) > 0 && (spl = ft_strsplit(s, ' ')) && (ft_strcmp("Plateau", spl[0]) == 0))
-	{////////read map params/////////////
-		map->N = ft_atoi(spl[1]);
-		map->X = ft_atoi(spl[2]);
-		while (i < 3)
-			free(spl[i++]);
-		free(spl);
-		free(s);
-		////////////create map with reading//////
-		if (map->N > 0 && map->X > 0 && get_next_line(1, &s) > 0)
-		{
-			free(s);
-			if ((map->m = ft_creatmass(map->N)) == NULL) //|| ft_map_valid(map) == NULL)
-				return (0);
-			//ft_show(map->m);
-			return(1);
-		}
-	}
-	return (0);
-}
-
-int	ft_map_valid(t_map *map)
+void	ft_show(char **c)
 {
 	int i;
 
 	i = -1;
-	while (++i < )
-
-}
-
-
-char	**ft_creatmass(int k)
-{
-	char	**mas;
-	int		i;
-	char	*s;
-
-	if (!(mas = (char**)malloc(sizeof(char*) * (k + 1))))
-		return (NULL);
-	i = -1;
-	while (++i <= k)
-		mas[i] = NULL;
-	i = -1;
-	while((++i < k) && (get_next_line(1, &s) > 0))
-	{
-		if (!(mas[i] = ft_strdup(s + 4)))
-			return(NULL);
-		free(s);
-	}
-	if (i != k)
-		return(NULL);
-	return(mas);
-}
-
-void	ft_show(char **g)
-{
-	int i;
-
-	i = -1;
-	while(g[++i])
-		ft_printf("%s\n", g[i]);
+	while(c[++i])
+		ft_printf("%s\n", c[i]);
 }
 
 void	ft_doublefree(char **s)
@@ -107,6 +54,28 @@ void	ft_doublefree(char **s)
 		free(s[i++]);
 	free(s);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /*	char	*s;

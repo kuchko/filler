@@ -17,7 +17,7 @@ OBJ_DIR = ./obj/
 CC = gcc
 CC_FLAGS = -Wall -Wextra -Werror
 
-SOURCES = main.c
+SOURCES = main.c map_piece.c #solving.c
 
 OBJECTS = $(addprefix $(OBJ_DIR), $(SOURCES:.c=.o))
 # OBJECTS = $(SOURCES:.c=.o)
