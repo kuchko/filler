@@ -10,29 +10,36 @@ int main(void)
 	t_fill	p;
 	char	*s;
 
-	ft_printf("%d\n", 2148);
+//	ft_printf("%d\n", 2148);
 	if (get_next_line(1, &s) > 0 && (ft_strncmp(s, "$$$ exec p", 10) == 0)
 		&& (s[10] == '1' || s[10] == '2') && ((ft_atoi(s + 10) == 1) || (ft_atoi(s + 10) == 2)))
 	{
 		map.pl = ft_atoi(s + 10);
 		free(s);
-		if (ft_map_read(&map) == 0 || ft_piece_read(&p) == 0)
+		p.fr = (map.pl == 1) ? "Oo" : "Xx";
+		p.en = (map.pl == 1) ? "Xx" : "Oo";
+
+		while (1)//get_next_line(1, &s) > 0)
 		{
-			system("leaks okuchko.filler");
-			return (0);
+			// ft_printf("in while s = %s\n", s);
+			if (ft_map_read(&map) == 0 || ft_piece_read(&p) == 0)
+			{
+				return (0);
+			}
+			// ft_printf("in while after read\n");
+			ft_solve_find(&map, &p);
+			ft_printf("%d %d\n", p.sy, p.sx);
+			// ft_putnbr_fd(p.sy, 1);
+			// ft_putchar_fd(' ', 1);
+			// ft_putnbr_fd(p.sx, 1);
+			// ft_putchar_fd('\n', 1);
+			ft_doublefree(map.c);
+			ft_doublefree(p.c);
 		}
-		p.fr = (map.pl == 1) ? "Xx" : "Oo";
-		p.en = (map.pl == 1) ? "Oo" : "Xx";
-//		ft_solve_find(&map, &p);
-		ft_printf("%d %d\n", p.sx, p.sy);
-//		ft_show(map.c);
-//		ft_show(p.c);
-		ft_doublefree(map.c);
-		ft_doublefree(p.c);
 	}
 	else
 		ft_printf("Bad player info\n");
-	system("leaks okuchko.filler");
+//	system("leaks okuchko.filler");
 	return (0);
 }
 

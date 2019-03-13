@@ -1,13 +1,13 @@
 #include "filler.h"
 
-int	ft_map_read(t_fill *mp)
+int	ft_map_read(t_fill *mp)//, char *s)
 {
 	char	**spl;
 	int		i;
 	char	*s;
 
 	i = 0;
-	if (get_next_line(1, &s) > 0 && (spl = ft_strsplit(s, ' ')) && (ft_strcmp("Plateau", spl[0]) == 0))
+	if ((get_next_line(1, &s) > 0) && (ft_strncmp("Plateau", s, 7) == 0) && (spl = ft_strsplit(s, ' ')))
 	{
 		mp->N = ft_atoi(spl[1]);
 		mp->X = ft_atoi(spl[2]);
@@ -60,7 +60,7 @@ int	ft_piece_read(t_fill *mp)
 	char	*s;
 
 	i = 0;
-	if (get_next_line(1, &s) > 0 && (spl = ft_strsplit(s, ' ')) && (ft_strcmp("Piece", spl[0]) == 0))
+	if (get_next_line(1, &s) > 0 && (ft_strncmp("Piece", s, 5) == 0) && (spl = ft_strsplit(s, ' ')))
 	{
 		mp->N = ft_atoi(spl[1]);
 		mp->X = ft_atoi(spl[2]);

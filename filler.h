@@ -19,13 +19,19 @@ typedef struct		s_fill
 
 int main(void);
 
-int		ft_map_read(t_fill *mp);
+int		ft_map_read(t_fill *mp);//, char *z);
 int		ft_creat_valid_map(t_fill *mp);
 int		ft_piece_read(t_fill *mp);
 int		ft_creat_valid_piece(t_fill *mp);
 
+
+
 void	ft_show(char **g);
 void	ft_doublefree(char **s);
+
 void	ft_solve_find(t_fill *map, t_fill *p);
+int	ft_put_check(t_fill *map, t_fill *p, int y, int x);
+int	ft_kr_find(t_fill *map, t_fill *p, int y, int x);
+int ft_manhetan(t_fill *map, t_fill *p, int y, int x);
 
 #endif
