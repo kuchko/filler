@@ -1,0 +1,19 @@
+Process:         okuchko.filler [74168]
+Path:            /Users/okuchko/Desktop/filler/okuchko.filler
+Load Address:    0x10af5d000
+Identifier:      okuchko.filler
+Version:         0
+Code Type:       X86-64
+Parent Process:  ruby [74167]
+
+Date/Time:       2019-03-14 20:01:06.589 +0200
+Launch Time:     2019-03-14 19:56:47.611 +0200
+OS Version:      Mac OS X 10.13.3 (17D47)
+Report Version:  7
+Analysis Tool:   /Applications/Xcode.app/Contents/Developer/usr/bin/leaks
+Analysis Tool Version:  Xcode 9.2 (9C40b)
+----
+
+leaks Report Version:  2.0
+Process 74168: 156 nodes malloced for 13 KB
+Process 74168: 0 leaks for 0 total leaked bytes.

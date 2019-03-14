@@ -78,7 +78,7 @@ int	ft_kr_find(t_fill *map, t_fill *p, int y, int x)
 	return (d > -1 ? d : 0);
 }
 
-/////////////// find min of all manhet_distances from x_y to enemies /////////////////////
+/////////////// find min of all manhet_distances from * <=> (x_y) to enemies /////////////////////
 int ft_manhetan(t_fill *map, t_fill *p, int y, int x)
 {
 	int j;

@@ -113,9 +113,9 @@ int				get_next_line(int fd, char **line)
 	}
 	return (0);
 }
+
+
 */
-
-
 
 
 
@@ -181,6 +181,35 @@ static int		ft_to_remain(t_list *this)
 }
 
 int				get_next_line(const int fd, char **line)
+{
+	static t_list	*lst;
+	t_list			*this;
+	char			*buf;
+	char			*u;
+	int				ret;
+
+	buf = (char*)malloc(sizeof(char) * (BUFF_SIZE + 1));
+	if (fd < 0 || BUFF_SIZE < 1 || !line || read(fd, buf, 0) < 0
+						|| !buf || !(this = ft_listing(&lst, fd)))
+		return (-1);
+	while (ft_count_char(this->content, '\n') == 0 &&
+						(ret = read(fd, buf, BUFF_SIZE)))
+	{
+		buf[ret] = '\0';
+		u = this->content;
+		if (ret == -1 || !(this->content = ft_strjoin(this->content, buf)))
+			return (-1);
+		free(u);
+	}
+	if (ft_to_line(line, this) == -1 || ft_to_remain(this) == -1)
+		return (-1);
+	free(buf);
+	if (ret || ft_strlen(this->content) || ft_strlen(*line))
+		return (1);
+	return (0);
+}
+
+int				get_next_line2(const int fd, char **line)
 {
 	static t_list	*lst;
 	t_list			*this;

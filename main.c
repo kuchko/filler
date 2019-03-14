@@ -3,7 +3,47 @@
 #include <stdio.h>
 
 // ./filler_vm -p2 players/abanlin.filler -p1 ../okuchko.filler -v -f maps/map00
-//$$$ exec p
+
+int main(void)
+{
+	t_fill	map;
+	t_fill	p;
+	char	*s;
+
+	if (get_next_line(FD1, &s) > 0 && (ft_strncmp(s, "$$$ exec p", 10) == 0)
+		&& (s[10] == '1' || s[10] == '2') && ((ft_atoi(s + 10) == 1) || (ft_atoi(s + 10) == 2)))
+	{
+		map.pl = ft_atoi(s + 10);
+		free(s);
+		p.fr = (map.pl == 1) ? "Oo" : "Xx";
+		p.en = (map.pl == 1) ? "Xx" : "Oo";
+		while (ft_game(&map, &p))
+			;
+	}
+	else
+		ft_printf("Bad player info\n");
+	system("leaks okuchko.filler > testliks");
+	return (0);
+}
+
+int ft_game(t_fill *map, t_fill *p)
+{
+
+	if (ft_map_read(map) == 0 || ft_piece_read(p) == 0)
+	{
+		system("leaks okuchko.filler > testliks");
+		return (0);
+	}
+	ft_solve_find(map, p);
+	ft_printf("%d %d\n", p->sy, p->sx);
+	ft_doublefree(map->c);
+	ft_doublefree(p->c);
+	return (1);
+}
+
+
+
+/*
 int main(void)
 {
 	t_fill	map;
@@ -11,7 +51,7 @@ int main(void)
 	char	*s;
 
 //	ft_printf("%d\n", 2148);
-	if (get_next_line(1, &s) > 0 && (ft_strncmp(s, "$$$ exec p", 10) == 0)
+	if (get_next_line(FD1, &s) > 0 && (ft_strncmp(s, "$$$ exec p", 10) == 0)
 		&& (s[10] == '1' || s[10] == '2') && ((ft_atoi(s + 10) == 1) || (ft_atoi(s + 10) == 2)))
 	{
 		map.pl = ft_atoi(s + 10);
@@ -19,29 +59,26 @@ int main(void)
 		p.fr = (map.pl == 1) ? "Oo" : "Xx";
 		p.en = (map.pl == 1) ? "Xx" : "Oo";
 
-		while (1)//get_next_line(1, &s) > 0)
+		while (1)
 		{
-			// ft_printf("in while s = %s\n", s);
 			if (ft_map_read(&map) == 0 || ft_piece_read(&p) == 0)
 			{
+				system("leaks okuchko.filler > testliks");
 				return (0);
 			}
-			// ft_printf("in while after read\n");
 			ft_solve_find(&map, &p);
 			ft_printf("%d %d\n", p.sy, p.sx);
-			// ft_putnbr_fd(p.sy, 1);
-			// ft_putchar_fd(' ', 1);
-			// ft_putnbr_fd(p.sx, 1);
-			// ft_putchar_fd('\n', 1);
 			ft_doublefree(map.c);
 			ft_doublefree(p.c);
 		}
 	}
 	else
 		ft_printf("Bad player info\n");
-//	system("leaks okuchko.filler");
+	system("leaks okuchko.filler > testliks");
 	return (0);
 }
+*/
+
 
 void	ft_show(char **c)
 {
