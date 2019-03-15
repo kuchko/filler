@@ -22,7 +22,7 @@ int main(void)
 	}
 	else
 		ft_printf("Bad player info\n");
-	system("leaks okuchko.filler > testliks");
+//	system("leaks okuchko.filler > testliks.txt");
 	return (0);
 }
 
@@ -31,7 +31,7 @@ int ft_game(t_fill *map, t_fill *p)
 
 	if (ft_map_read(map) == 0 || ft_piece_read(p) == 0)
 	{
-		system("leaks okuchko.filler > testliks");
+		system("leaks okuchko.filler > testliks.txt");
 		return (0);
 	}
 	ft_solve_find(map, p);
@@ -58,8 +58,8 @@ int main(void)
 		free(s);
 		p.fr = (map.pl == 1) ? "Oo" : "Xx";
 		p.en = (map.pl == 1) ? "Xx" : "Oo";
-
-		while (1)
+1
+		while ()
 		{
 			if (ft_map_read(&map) == 0 || ft_piece_read(&p) == 0)
 			{
